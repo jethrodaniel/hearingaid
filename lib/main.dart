@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_volume_slider/flutter_volume_slider.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,7 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: TabBarView(
           children: [
-            Icon(Icons.volume_up),
+            Row(children: [
+              Column(children: [
+                // Icon(Icons.volume_up),
+						    FlutterVolumeSlider(
+                  display: Display.VERTICAL,
+                  sliderActiveColor: Colors.blue,
+                  sliderInActiveColor: Colors.grey,
+                ),
+							])
+						]),
             Icon(Icons.equalizer),
             Row(children: [
               Column(children: [
