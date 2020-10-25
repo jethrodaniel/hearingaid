@@ -51,7 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Icon(Icons.volume_up),
             Icon(Icons.equalizer),
-            Icon(Icons.bluetooth),
+            Row(children: [
+              Column(children: [
+                Icon(Icons.bluetooth),
+                Icon(Icons.bluetooth_disabled),
+                Icon(Icons.bluetooth_connected),
+                Icon(Icons.bluetooth_searching),
+              ]),
+            ]),
             Icon(Icons.settings),
           ],
         ),
