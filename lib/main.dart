@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_volume_slider/flutter_volume_slider.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  double _currentSliderValue = 20;
 
   void _incrementCounter() {
     setState(() {
@@ -34,6 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double _lowerValue = 0, _upperValue = 100;
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -50,16 +53,56 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: TabBarView(
           children: [
-            Row(children: [
-              Column(children: [
-                // Icon(Icons.volume_up),
-						    FlutterVolumeSlider(
-                  display: Display.VERTICAL,
-                  sliderActiveColor: Colors.blue,
-                  sliderInActiveColor: Colors.grey,
+            Container(
+              margin: EdgeInsets.only(top: 50, left: 50, right: 50),
+              /* alignment: Alignment.centerLeft, */
+              child: FlutterSlider(
+                values: [100],
+                max: 100,
+                min: 1,
+                onDragging: (handlerIndex, lowerValue, upperValue) {
+                  _lowerValue = lowerValue;
+                  _upperValue = upperValue;
+                  setState(() {});
+                },
+                axis: Axis.vertical,
+                handler: FlutterSliderHandler(
+                  decoration: BoxDecoration(),
+                  child: Material(
+                    type: MaterialType.canvas,
+                    color: Colors.blue,
+                    elevation: 10,
+                    child: Container(
+                        padding: EdgeInsets.all(5),
+                        child: Icon(
+                          Icons.adjust,
+                          size: 25,
+                        ),
+                      ),
+                  ),
                 ),
-							])
-						]),
+                /* tooltip: FlutterSliderTooltip( */
+                /*   disabled: true, */
+                /* ), */
+                /* rightHandler: FlutterSliderHandler( */
+                /*   child: Icon( */
+                /*     Icons.chevron_left, */
+                /*     color: Colors.red, */
+                /*     size: 24, */
+                /*   ), */
+                /* ), */
+                trackBar: FlutterSliderTrackBar(
+                  inactiveTrackBar: BoxDecoration(
+                    /* borderRadius: BorderRadius.circular(20), */
+                    color: ThemeData.dark().accentColor,
+                  ),
+                  activeTrackBar: BoxDecoration(
+                    /* color: ThemeData.dark().textTheme.caption.color, */
+                    color: ThemeData.dark().primaryColor,
+                  ),
+                ),
+              ),
+            ),
             Icon(Icons.equalizer),
             Row(children: [
               Column(children: [
