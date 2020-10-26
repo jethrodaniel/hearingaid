@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _volumePage(),
             Icon(Icons.equalizer),
             _bluetoothPage(),
-            Icon(Icons.settings),
+            _settingsPage()
           ],
         ),
       ),
@@ -85,6 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () => null,
         ),
       ]),
+    ]);
+  }
+
+  Widget _settingsPage() {
+    return Row(children: [
+      Column(children: [
+        Text('TODO: settings'),
+      ])
     ]);
   }
 
