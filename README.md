@@ -4,6 +4,18 @@
 >
 > Matthew 11:14-16, KJV
 
+Open source mobile app to control hearing aids.
+
+## what it do
+
+It seems like all the major hearing aid apps work in a device-specific way, and
+that's a shame. The goal here is to reverse engineer them to support a single
+app.
+
+Supported Devices:
+
+- [ha-802](docs/ha-802.md)
+
 ## install
 
 ```

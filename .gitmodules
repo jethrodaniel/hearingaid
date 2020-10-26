@@ -1,0 +1,3 @@
+[submodule "tools/ble"]
+	path = tools/ble
+	url = https://github.com/jethrodaniel/ble
