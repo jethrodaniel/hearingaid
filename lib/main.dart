@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
+import 'package:flutter_ble_lib/flutter_ble_lib.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +25,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   double _leftVolume = 0, _rightVolume = 0;
+  List devices = List();
+  var isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,32 +46,46 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: TabBarView(
           children: [
-            Container(
-              margin: EdgeInsets.all(20),
-              child: Row(children: [
-                _volumeSlider('left'),
-                SizedBox(width: 30),
-                _volumeSlider('right'),
-                SizedBox(width: 30),
-                Text('L: ${100 - _leftVolume}'),
-                SizedBox(width: 30),
-                Text('R: ${100 - _rightVolume}'),
-              ]),
-            ),
+            _volumePage(),
             Icon(Icons.equalizer),
-            Row(children: [
-              Column(children: [
-                Icon(Icons.bluetooth),
-                Icon(Icons.bluetooth_disabled),
-                Icon(Icons.bluetooth_connected),
-                Icon(Icons.bluetooth_searching),
-              ]),
-            ]),
+            _bluetoothPage(),
             Icon(Icons.settings),
           ],
         ),
       ),
     );
+  }
+
+  Widget _volumePage() {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: Row(children: [
+        _volumeSlider('left'),
+        SizedBox(width: 30),
+        _volumeSlider('right'),
+        SizedBox(width: 30),
+        Text('L: ${100 - _leftVolume}'),
+        SizedBox(width: 30),
+        Text('R: ${100 - _rightVolume}'),
+      ]),
+    );
+  }
+
+  Widget _bluetoothPage() {
+    return Row(children: [
+      Column(children: [
+        Text('TODO: connections'),
+        Icon(Icons.bluetooth),
+        Icon(Icons.bluetooth_disabled),
+        Icon(Icons.bluetooth_connected),
+        Icon(Icons.bluetooth_searching),
+        RaisedButton(
+          child: new Text("Scan for devices"),
+          /* color: ThemeData.dark().accentColor, */
+          onPressed: () => null,
+        ),
+      ]),
+    ]);
   }
 
   Widget _volumeSlider(String dir) {

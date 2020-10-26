@@ -25,4 +25,6 @@ flutter build # prod
 
 ## dev
 
+- [material ui icon list](https://material.io/resources/icons/?icon=bluetooth&style=baseline)
 - https://dart.dev/tools/dartfmt
+- https://pub.dev/packages/flutter_xlider
