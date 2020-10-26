@@ -78,10 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return FlutterSlider(
       values: [_curr],
       max: 100,
-      min: 1,
+      min: 0,
       step: FlutterSliderStep(step: 10),
       onDragging: (handlerIndex, leftVolume, upperValue) {
         setState(() {
+          leftVolume = (leftVolume / 10) * 10;
           if (dir == 'right')
             _rightVolume = leftVolume;
           else
@@ -99,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       tooltip: FlutterSliderTooltip(
+        disabled: true,
         direction: FlutterSliderTooltipDirection.right,
         positionOffset:
             FlutterSliderTooltipPositionOffset(right: _tooltipOffset),
