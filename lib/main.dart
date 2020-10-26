@@ -4,7 +4,6 @@ import 'package:flutter_xlider/flutter_xlider.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,25 +17,16 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  double _currentSliderValue = 20;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  double _lowerValue = 0;
 
   @override
   Widget build(BuildContext context) {
-    double _lowerValue = 0, _upperValue = 100;
-
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -54,54 +44,63 @@ class _MyHomePageState extends State<MyHomePage> {
         body: TabBarView(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 50, left: 50, right: 50),
-              /* alignment: Alignment.centerLeft, */
-              child: FlutterSlider(
-                values: [100],
-                max: 100,
-                min: 1,
-                onDragging: (handlerIndex, lowerValue, upperValue) {
-                  _lowerValue = lowerValue;
-                  _upperValue = upperValue;
-                  setState(() {});
-                },
-                axis: Axis.vertical,
-                handler: FlutterSliderHandler(
-                  decoration: BoxDecoration(),
-                  child: Material(
-                    type: MaterialType.canvas,
-                    color: Colors.blue,
-                    elevation: 10,
-                    child: Container(
+              margin: EdgeInsets.all(20),
+              child: Row(children: [
+                /* Text(_lowerValue.toString()), */
+                FlutterSlider(
+                  /* handlerWidth: 60, */
+                  values: [100],
+                  max: 100,
+                  min: 1,
+                  step: FlutterSliderStep(step: 10),
+                  onDragging: (handlerIndex, lowerValue, upperValue) {
+                    setState(() {
+                      _lowerValue = 100 - lowerValue;
+                    });
+                  },
+                  axis: Axis.vertical,
+                  handler: FlutterSliderHandler(
+                    decoration: BoxDecoration(),
+                    child: Material(
+                      type: MaterialType.canvas,
+                      color: ThemeData.dark().primaryColor,
+                      elevation: 10,
+                      child: Container(
                         padding: EdgeInsets.all(5),
                         child: Icon(
-                          Icons.adjust,
+                          Icons.horizontal_rule,
                           size: 25,
                         ),
                       ),
+                    ),
+                  ),
+                  tooltip: FlutterSliderTooltip(
+                    direction: FlutterSliderTooltipDirection.right,
+                    positionOffset:
+                        FlutterSliderTooltipPositionOffset(right: -50),
+                  ),
+                  trackBar: FlutterSliderTrackBar(
+                    activeTrackBarHeight: 10,
+                    inactiveTrackBarHeight: 10,
+                    inactiveTrackBar: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: ThemeData.dark().accentColor,
+                    ),
+                    activeTrackBar: BoxDecoration(
+                      color: ThemeData.dark().primaryColor,
+                    ),
+                  ),
+                  hatchMark: FlutterSliderHatchMark(
+                    displayLines: true,
+                    labelsDistanceFromTrackBar: -60,
+                    labels: [for (var i = 0; i < 11; i += 1) i]
+                        .map((n) => FlutterSliderHatchMarkLabel(
+                            percent: 100 - 10.0 * n,
+                            label: Text('${10.0 * n}%')))
+                        .toList(),
                   ),
                 ),
-                /* tooltip: FlutterSliderTooltip( */
-                /*   disabled: true, */
-                /* ), */
-                /* rightHandler: FlutterSliderHandler( */
-                /*   child: Icon( */
-                /*     Icons.chevron_left, */
-                /*     color: Colors.red, */
-                /*     size: 24, */
-                /*   ), */
-                /* ), */
-                trackBar: FlutterSliderTrackBar(
-                  inactiveTrackBar: BoxDecoration(
-                    /* borderRadius: BorderRadius.circular(20), */
-                    color: ThemeData.dark().accentColor,
-                  ),
-                  activeTrackBar: BoxDecoration(
-                    /* color: ThemeData.dark().textTheme.caption.color, */
-                    color: ThemeData.dark().primaryColor,
-                  ),
-                ),
-              ),
+              ]),
             ),
             Icon(Icons.equalizer),
             Row(children: [
