@@ -8,13 +8,19 @@ Open source mobile app to control hearing aids.
 
 ## what it do
 
-It seems like all the major hearing aid apps work in a device-specific way, and
-that's a shame. The goal here is to reverse engineer them to support a single
-app.
+Most hearing aids today are controlled via a smartphone app which communicates
+with the device using the Bluetooth Low Energy (BLE) protocol.
+
+At the moment, every app on the market is proprietary and only supports its
+specific brand. This makes for an inconsistent user experience, and makes it
+difficult to do additional things with your device, such as setting and saving
+custom equalizer settings.
+
+This app tries to provide a device-agnostic solution.
 
 Supported Devices:
 
-- [ha-802](docs/ha-802.md)
+- [ha-802](devices/ha-802.md)
 
 ## install
 
@@ -27,4 +33,4 @@ flutter build # prod
 
 - [material ui icon list](https://material.io/resources/icons/?icon=bluetooth&style=baseline)
 - https://dart.dev/tools/dartfmt
-- https://pub.dev/packages/flutter_xlider
+
